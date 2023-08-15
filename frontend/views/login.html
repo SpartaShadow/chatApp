@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../public/signUp.css">
+</head>
+<body>
+    <div class="container">
+        <!--Data or Content-->
+           <div class="content-holder">
+                <h2>Hello!</h2>
+                <p>Welcome To <br><br> Chat App</p>
+                           </div>
+  
+        
+        <!--Forms-->
+        <form onsubmit="signUp(event)" class="box-2">
+            <div id="msg"> </div>
+              <div class="login-form-container">
+                <h1>Sign Up</h1>
+                <input type="text" id="name" placeholder="Username" class="input-field" required>
+                <br><br>
+                <input type="email" id="email" placeholder="Email" class="input-field" required>
+                <br><br>
+                <input type="number" id="number" placeholder="Phone number" class="input-field" required>
+                <br><br>
+                <input type="password" id="password" placeholder="Password" class="input-field" required>
+                <br><br>
+                <button type="submit" class="login-button">Sign Up</button>
+            </div>
+        </form>
+        </div>
+    
+    <script>
+
+//functions
+
+function signup()
+{
+    document.querySelector(".login-form-container").style.cssText = "display: none;";
+    document.querySelector(".signup-form-container").style.cssText = "display: block;";
+    document.querySelector(".container").style.cssText = "background: linear-gradient(to bottom, rgb(56, 189, 149),  rgb(28, 139, 106));";
+    document.querySelector(".button-1").style.cssText = "display: none";
+    document.querySelector(".button-2").style.cssText = "display: block";
+
+};
+
+function login()
+{
+    document.querySelector(".signup-form-container").style.cssText = "display: none;";
+    document.querySelector(".login-form-container").style.cssText = "display: block;";
+    document.querySelector(".container").style.cssText = "background: linear-gradient(to bottom, rgb(6, 108, 224),  rgb(14, 48, 122));";
+    document.querySelector(".button-2").style.cssText = "display: none";
+    document.querySelector(".button-1").style.cssText = "display: block";
+
+}
+    </script>
+    <script type="text/javascript" src="../script/signUp.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+    </body>
+</html>
