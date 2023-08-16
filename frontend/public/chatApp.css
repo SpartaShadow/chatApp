@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
+
+*{
+    font-family: 'quicksand',Arial, Helvetica, sans-serif;
+    box-sizing: border-box;
+}
+
+body{
+    background:#fff;
+}
+
+.form-modal{
+    position:relative;
+    width:600px;
+    height:524px;
+    margin-top:3em;
+    left:50%;
+    transform:translateX(-50%);
+    background:wheat;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    box-shadow:0 3px 20px 0px rgba(0, 0, 0, 0.1)
+}
+
+.form-modal input{
+    position: relative;
+    width:85%;
+    font-size:1em;
+    padding:0.4em ; 
+    border-bottom-left-radius: 10px;
+    border:none;
+    background:white;
+    font-weight: bold;
+    transition:0.3s;
+    outline:none;
+}
+
+.form-modal button{
+    position: relative;
+    font-size:1em;
+    float:right;
+    width:90px;
+    padding:0.4em;
+    color:whitesmoke;
+    background:#626d62;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border:none;
+
+}
+
+.form-modal header{
+    position: relative;
+    width:auto;
+    height:50px;
+    background:#626d62;
+    border-top-right-radius: 10px;
+    border-top-left-radius: 10px;
+
+}
+
+.form-modal fieldset{
+    position: relative;
+    width:auto;
+    height:440px;
+    background:wheat;
+    line-height:10px;
+    border:none;
+
+}
+
+
+.form-modal .chat{
+    font-size:2em;
+    color:whitesmoke;
+    text-align: center;
+}
+
+.form-modal fieldset .join{
+  text-align: center;
+}
