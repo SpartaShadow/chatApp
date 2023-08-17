@@ -62,3 +62,18 @@ exports.sendMsg = async (req, res, next) => {
     console.log(err);
   }
 };
+
+//GET USER'S MESSAGE
+exports.getMsg = async (req, res, next) => {
+  try {
+    let result = await req.user.getMsgs({
+      include: {
+        model: User,
+        attributes: ["name"],
+      },
+    });
+    res.status(200).json(result);
+  } catch (err) {
+    console.log(err);
+  }
+};
