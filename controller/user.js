@@ -1,6 +1,7 @@
 const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
+const Msg = require("../model/msg");
 
 //SIGNUP
 exports.signup = async (req, res, next) => {
@@ -26,7 +27,7 @@ exports.signup = async (req, res, next) => {
 
 //function for creating token
 function generateToken(id, name, number) {
-  return jwt.sign({ userId: id, name: name, number: number }, "asifali");
+  return jwt.sign({ userId: id, name: name, number: number }, "ayanali");
 }
 
 //LOGIN
@@ -49,4 +50,15 @@ exports.login = async (req, res, next) => {
       });
     })
     .catch((err) => console.log(err));
+};
+
+//SAVE MESSAGE
+exports.sendMsg = async (req, res, next) => {
+  const { message } = req.body;
+  try {
+    const result = await req.user.createMsg({ message });
+    res.status(200).json(result);
+  } catch (error) {
+    console.log(err);
+  }
 };

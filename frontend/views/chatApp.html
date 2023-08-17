@@ -21,12 +21,14 @@
       <p>p2 : Hello!!</p>
     </fieldset>
     <div>
-      <form>
+      <form onsubmit="saveMsg(event)">
         <input type="text" id="msg">
-        <button type="button">Send</button>
+        <button type="submit">Send</button>
       </form>
     </div>
   </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
+  <script src="../script/login.js"></script>
 </body>
 </body>
 
