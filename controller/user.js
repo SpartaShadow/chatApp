@@ -52,7 +52,7 @@ exports.login = async (req, res, next) => {
     .catch((err) => console.log(err));
 };
 
-//SAVE MESSAGE
+//SEND MESSAGE
 exports.sendMsg = async (req, res, next) => {
   const { message } = req.body;
   try {
