@@ -63,16 +63,53 @@ exports.sendMsg = async (req, res, next) => {
   }
 };
 
-//GET USER'S MESSAGE
+//GET OLD/NEXT 10 USER'S MESSAGE
 exports.getMsg = async (req, res, next) => {
+  let id = +req.query.msgid;
+  console.log(req.query);
+  if (req.query.what === "old") {
+    id = +req.query.msgid - 10;
+    if (id < 10) {
+      id = 0;
+    }
+  }
+  console.log(id + "74");
   try {
-    let result = await req.user.getMsgs({
+    const result = await Msg.findAll({
+      offset: id, //+/NUMEBR for integer type
+      limit: 10,
+      attributes: ["id", "message"],
       include: {
         model: User,
         attributes: ["name"],
       },
     });
-    res.status(200).json(result);
+    if (result) {
+      return res.status(200).json(result);
+    }
+    res.status(404).json({ success: "false" });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//LATEST MESSAGE
+exports.latestMsg = async (req, res, next) => {
+  try {
+    const count = await Msg.count();
+    const result = await Msg.findAll({
+      offset: Number(count - 10),
+      limit: 10,
+      attributes: ["id", "message"],
+      include: {
+        model: User,
+        attributes: ["name"],
+      },
+    });
+    if (result) {
+      return res.status(200).json(result);
+    }
+    res.status(404).json({ success: "false" });
   } catch (err) {
     console.log(err);
   }

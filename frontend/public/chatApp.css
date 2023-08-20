@@ -37,12 +37,15 @@ body{
     outline:none;
 }
 
-.form-modal button{
+
+
+.form-modal .btn{
     position: relative;
     font-size:1em;
     float:right;
     width:90px;
     padding:0.4em;
+    cursor: pointer;
     color:whitesmoke;
     background:#626d62;
     border-top-right-radius: 10px;
@@ -50,6 +53,12 @@ body{
     border:none;
 
 }
+
+
+.form-modal button:hover {
+    background-color: #292828;
+    color: #fff;
+  }
 
 .form-modal header{
     position: relative;
@@ -63,14 +72,26 @@ body{
 
 .form-modal fieldset{
     position: relative;
+    overflow-y: scroll;
     width:auto;
     height:440px;
     background:wheat;
     line-height:10px;
-    border:none;
+    /* border:none; */
+    border: 1px solid black;
+
+
 
 }
 
+.form-modal .chatbox{
+    padding: 10px;
+    background-color: rgb(54, 51, 51);
+    width:fit-content;
+    border-radius: 8px;
+    border-top-left-radius: 0px;
+    color:whitesmoke;
+}
 
 .form-modal .chat{
     font-size:2em;
@@ -79,5 +100,14 @@ body{
 }
 
 .form-modal fieldset .join{
+  margin: auto;
+  width:fit-content;
   text-align: center;
+  background-color: rgb(105, 99, 99);
+  padding:5px;
+  border-radius: 8px;
+  color:whitesmoke;
 }
+
+
+

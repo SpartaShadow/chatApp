@@ -15,6 +15,8 @@
         <p class="chat">Chat App</p>
       </header>
     </div>
+    <button type="button" class="btn" onclick="oldMsg(event)">Old Message</button>
+    <button type="button" onclick="nextMsg(event)">New Message</button>
     <fieldset id="msgs">
       <p class="join">ayan joined</p>
       <p>p1: Hello!!</p>
@@ -30,26 +32,20 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
 
   <script>
-
-    //REFRESH WINDOW OR REFRESH DATA EVERY SECOND
     const parentNode = document.getElementById('msgs');
-    const token = localStorage.getItem('token');
-    setInterval(refreshMsg,1000);
-    async function refreshMsg(){
-      let resp = await axios.get(`http://localhost:3000/user/login/getMsg`, { headers: { "authorization": token } });
-      console.log(resp);
-      parentNode.innerHTML=' ';
-      for (let i = 0; i < resp.data.length; i++) {
-        showMsg(resp.data[i]);
+    //REFRESH WINDOW OR REFRESH DATA EVERY SECOND
+    window.addEventListener("DOMContentLoaded", async function lsLoad() {
+       if(!localStorage.getItem('chat'))
+      {
+        return latestMsg();
+        }
+      chatMsg = JSON.parse(localStorage.getItem('chat'));
+      parentNode.innerHTML= ' ';
+      for (let i = 0; i < chatMsg.length; i++) {
+        await showMsg(chatMsg[i]);
+        parentNode.scrollTop=parentNode.scrollHeight;
       }
-    }
-      
-
-    //DISPLAY MESSAGES
-    function showMsg(obj) {
-      const leaf = `<p>${obj.user.name} : ${obj.message}</p>`
-      parentNode.innerHTML = parentNode.innerHTML + leaf;
-    }
+      })
   </script>
 
   <script src="../script/login.js"></script>
