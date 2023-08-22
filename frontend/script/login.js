@@ -1,3 +1,5 @@
+const closeBtn = document.getElementById("close");
+
 //SIGNUP
 async function signUp(event) {
   event.preventDefault();
@@ -35,12 +37,14 @@ async function logUp(event) {
     localStorage.setItem("token", res.data.token);
     alert(`${res.data.message}`);
     window.location.href = "../views/chatApp.html";
+    // parentNode.innerHTML=parent.innerHTML+`<p class="join">${res.data.name} joined</p>`;
   } catch (err) {
     console.log(err);
     alert(`${err.response.data.message}`);
   }
 }
 
+//SAVE MESSAGE
 async function saveMsg(event) {
   event.preventDefault();
   const message = event.target.msg.value;
@@ -51,11 +55,19 @@ async function saveMsg(event) {
   try {
     const token = localStorage.getItem("token");
     let res = await axios.post(
-      "http://localhost:3000/user/login/sendMsg",
+      "http://localhost:3000/verifiedUser/sendMsg",
       obj,
       { headers: { authorization: token } }
     );
-    console.log(res);
+    console.log(res.status);
+    let merged = JSON.parse(localStorage.getItem("chat"));
+    if (merged.length === 10) {
+      merged.shift();
+    }
+    merged.push(res.data);
+    localStorage.setItem("chat", JSON.stringify(merged));
+    showMsg(res.data);
+    parentNode.scrollTop = parentNode.scrollHeight;
   } catch (err) {
     console.log(err);
   }
@@ -76,7 +88,7 @@ async function nextMsg(event) {
       msgid = getmsgId[getmsgId.length - 1].id;
     }
     let resp = await axios.get(
-      `http://localhost:3000/user/login/getMsg?what=next&msgid=${msgid}`,
+      `http://localhost:3000/verifiedUser/getMsg?what=next&msgid=${msgid}`,
       { headers: { authorization: token } }
     );
     console.log(resp);
@@ -97,20 +109,15 @@ async function nextMsg(event) {
   }
 }
 
+//LATEST MESSAGE
 async function latestMsg() {
   const token = localStorage.getItem("token");
   try {
-    let resp = await axios.get("http://localhost:3000/user/login/latestMsg", {
+    let resp = await axios.get("http://localhost:3000/verifiedUser/latestMsg", {
       headers: { authorization: token },
     });
     console.log(resp);
-    parentNode.innerHTML = " ";
     localStorage.setItem("chat", JSON.stringify(resp.data));
-    let parsedChat = JSON.parse(localStorage.getItem("chat"));
-    for (let i = 0; i < parsedChat.length; i++) {
-      await showMsg(parsedChat[i]);
-      parentNode.scrollTop = parentNode.scrollHeight;
-    }
   } catch (err) {
     console.log(err);
   }
@@ -118,7 +125,7 @@ async function latestMsg() {
 
 //DISPLAY MESSAGES
 function showMsg(obj) {
-  const leaf = `<p class="chatbox">${obj.user.name} : ${obj.message}</p>`;
+  const leaf = `<p class="chatbox">${obj.name} : ${obj.message}</p>`;
   parentNode.innerHTML = parentNode.innerHTML + leaf;
 }
 
@@ -126,7 +133,7 @@ function showMsg(obj) {
 async function oldMsg(event) {
   event.preventDefault();
   if (!localStorage.getItem("token")) {
-    return (window.location.href = "/views/login.html");
+    return (window.location.href = "../views/login.html");
   }
   const token = localStorage.getItem("token");
   try {
@@ -138,7 +145,7 @@ async function oldMsg(event) {
       console.log(msgid);
     }
     let resp = await axios.get(
-      `http://localhost:3000/user/login/getMsg?what=old&msgid=${msgid}`,
+      `http://localhost:3000/verifiedUser/getMsg?what=old&msgid=${msgid}`,
       { headers: { authorization: token } }
     );
     console.log(resp);
@@ -157,4 +164,39 @@ async function oldMsg(event) {
   } catch (err) {
     console.log(err);
   }
+}
+
+//ADD GROUP
+async function addGrp(event) {
+  event.preventDefault();
+  const grpName = event.target.grpName.value;
+  const obj = {
+    grpName,
+  };
+  event.target.grpName.value = " ";
+  closeBtn.click();
+  let mergedGrp = [];
+  const token = localStorage.getItem("token");
+  let resp = await axios.post("http://localhost:3000/user/login/addGrp", obj, {
+    headers: { authorization: token },
+  });
+  console.log(resp);
+  mergedGrp = JSON.parse(localStorage.getItem("grpname"));
+  mergedGrp.push(resp.data.message);
+  localStorage.setItem("grpname", JSON.stringify(mergedGrp));
+  showGroup(resp.data.message);
+}
+
+async function getGrp() {
+  const token = localStorage.getItem("token");
+  let resp = await axios.get("http://localhost:3000/user/login/getGrp", {
+    headers: { authorization: token },
+  });
+  console.log(resp);
+  localStorage.setItem("grpname", JSON.stringify(resp.data.message));
+}
+
+function showGroup(obj) {
+  const tile = `<button id=" ${obj.id} "  type="button" class="tilebtn">${obj.grpName}</button>`;
+  tileNode.innerHTML = tileNode.innerHTML + tile;
 }

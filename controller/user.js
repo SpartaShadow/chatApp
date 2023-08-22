@@ -43,6 +43,7 @@ exports.login = async (req, res, next) => {
         if (result) {
           return res.status(201).json({
             message: "Login success",
+            name: exist[0].name,
             token: generateToken(exist[0].id, exist[0].name, exist[0].number),
           });
         }
@@ -50,67 +51,4 @@ exports.login = async (req, res, next) => {
       });
     })
     .catch((err) => console.log(err));
-};
-
-//SEND MESSAGE
-exports.sendMsg = async (req, res, next) => {
-  const { message } = req.body;
-  try {
-    const result = await req.user.createMsg({ message });
-    res.status(200).json(result);
-  } catch (error) {
-    console.log(err);
-  }
-};
-
-//GET OLD/NEXT 10 USER'S MESSAGE
-exports.getMsg = async (req, res, next) => {
-  let id = +req.query.msgid;
-  console.log(req.query);
-  if (req.query.what === "old") {
-    id = +req.query.msgid - 10;
-    if (id < 10) {
-      id = 0;
-    }
-  }
-  console.log(id + "74");
-  try {
-    const result = await Msg.findAll({
-      offset: id, //+/NUMEBR for integer type
-      limit: 10,
-      attributes: ["id", "message"],
-      include: {
-        model: User,
-        attributes: ["name"],
-      },
-    });
-    if (result) {
-      return res.status(200).json(result);
-    }
-    res.status(404).json({ success: "false" });
-  } catch (err) {
-    console.log(err);
-  }
-};
-
-//LATEST MESSAGE
-exports.latestMsg = async (req, res, next) => {
-  try {
-    const count = await Msg.count();
-    const result = await Msg.findAll({
-      offset: Number(count - 10),
-      limit: 10,
-      attributes: ["id", "message"],
-      include: {
-        model: User,
-        attributes: ["name"],
-      },
-    });
-    if (result) {
-      return res.status(200).json(result);
-    }
-    res.status(404).json({ success: "false" });
-  } catch (err) {
-    console.log(err);
-  }
 };

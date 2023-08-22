@@ -11,40 +11,71 @@ body{
 
 .form-modal{
     position:relative;
-    width:600px;
+    width:795px;
     height:524px;
     margin-top:3em;
     left:50%;
     transform:translateX(-50%);
-    background:wheat;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
+    background:#626d62;
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
     border-bottom-right-radius: 10px;
     border-bottom-left-radius: 10px;
-    box-shadow:0 3px 20px 0px rgba(0, 0, 0, 0.1)
+    border:2.5px solid #3e413e;
+    box-shadow:0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
-.form-modal input{
+.form-modal .input{
     position: relative;
-    width:85%;
+    margin-left:6.4cm;
+    width:485px;
     font-size:1em;
-    padding:0.4em ; 
-    border-bottom-left-radius: 10px;
+    padding:0.3em ; 
     border:none;
-    background:white;
+    background:whitesmoke;
     font-weight: bold;
     transition:0.3s;
     outline:none;
 }
 
+.form-modal .searchbox{
+    position: relative;
+    width:170px;
+    font-size:1em;
+    padding:0.3em ; 
+    border:1px solid black;
+    background:whitesmoke;
+    font-weight: bold;
+    outline: none;
+}
 
+.form-modal fieldset{
+    /* position: relative; */
+    overflow-y: scroll;
+    width:550px;
+    margin-top: -27.5em;
+    float: right;
+    height:440px;
+    background:wheat;
+    line-height:10px;
+    /* border:none; */
+    border: 2px solid rgb(37, 37, 37);
+}
+.form-modal .gpbox{
+    /* position: relative; */
+    width:243px;
+    height:440px;
+    background:wheat;
+    line-height:10px;
+    /* border:none; */
+    border: 2px solid rgb(37, 37, 37);
+}
 
 .form-modal .btn{
     position: relative;
     font-size:1em;
-    float:right;
-    width:90px;
-    padding:0.4em;
+    width:59px;
+    padding:0.3em 0.7em;
     cursor: pointer;
     color:whitesmoke;
     background:#626d62;
@@ -54,35 +85,69 @@ body{
 
 }
 
+.form-modal .searchbtn{
+    position: relative;
+    font-size:1em;
+    width:33px;
+    float: right;
+    height:32px;
+    cursor: pointer;
+    color:whitesmoke;
+    background:#04AA6D;
+    border:none;
+}
+.form-modal .tiles{
+overflow-inline: scroll;
+}
 
-.form-modal button:hover {
+.form-modal .tilebtn{
+    text-align: left;
+    cursor:pointer;
+    background-color: rgb(192, 179, 179);
+    width: 237px;
+    border: none;
+    font-size: 16px;
+    border-top:0.5px solid black ;
+    border-bottom:0.5px solid black ;
+    height:55px;
+    color:whitesmoke;
+}
+
+.form-modal .searchdiv{
+    position: relative;
+    width:238px;
+    border:1.8px solid black;
+    background:whitesmoke;
+}
+
+.form-modal .btn:hover {
     background-color: #292828;
     color: #fff;
   }
 
+  .form-modal .searchbtn:hover{
+    background-color: #292828;
+    color: #fff;
+}
+
+  .form-modal .tilebtn:hover
+{
+    background-color: #797474;
+    color: #fff;
+}
 .form-modal header{
     position: relative;
     width:auto;
     height:50px;
-    background:#626d62;
+    margin-top: -2em;
+    /* background:#626d62; */
+    background: #04AA6D;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
-
+    
 }
 
-.form-modal fieldset{
-    position: relative;
-    overflow-y: scroll;
-    width:auto;
-    height:440px;
-    background:wheat;
-    line-height:10px;
-    /* border:none; */
-    border: 1px solid black;
 
-
-
-}
 
 .form-modal .chatbox{
     padding: 10px;
@@ -109,5 +174,83 @@ body{
   color:whitesmoke;
 }
 
+/* Button used to open the contact form - fixed at the bottom of the page */
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: fixed;
+  bottom: 23px;
+  right: 28px;
+  width: 280px;
+}
 
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  right: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
 
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: none;
+  background: #f1f1f1;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  background-color: #ddd;
+  outline: none;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 10px 20px;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border: none;
+  margin-left: 4em;
+  cursor: pointer;
+  width: 100px;
+  margin-bottom:10px;
+  opacity: 0.8;
+}
+
+.searchbtncross{
+  background-color: #04AA6D;
+  color: white;
+  padding: 10px 10px;
+  border: none;
+  margin-left: 4em;
+  cursor: pointer;
+  border-radius: 8px;
+  width: 40px;
+  margin-bottom:10px;
+  opacity: 0.8;
+  
+}
+
+.searchbtncross:hover{
+    background-color: #292828;
+    color: #fff;
+}
+  
