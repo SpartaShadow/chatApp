@@ -16,33 +16,43 @@
         <p class="chat">Chat App</p>
       </header>
     </div>
-    <!-- <button type="button" class="btn" onclick="oldMsg(event)">Old Message</button>
-    <button type="button" onclick="nextMsg(event)">New Message</button> -->
     <div class="gpbox">
       <div class="searchdiv">
       <input type="search" id="search" class="searchbox">
-      <button type="button" class="searchbtn" onclick="openForm(event)"><i class="fas fa-user"></i></button>
-      <button type="button" class="searchbtn" onclick="doSearch(event)"><i class="fas fa-search"></i></button>
-        
+      <button type="button" class="searchbtn" onclick="openForm()"><i class="fas fa-user"></i></button>
+      <button type="button" class="searchbtn" onclick="openForm1(event)"><i class="fas fa-search"></i></button>
     </div>
 
+    <!-- SEARCH POPUP -->
+ <div class="form-popup" id="myForm1">
+  <form class="form-container">
+   <label for="text"><b>Add User</b></label><br><br>
+   <ul id="listUsers">
+    <p><a style="cursor: pointer;" onclick="return addUser()"><span> &#10004</span></a> Hello</p>
+    <p>hello</p>
+    <p>hello</p>
+   </ul>
+   <button type="button" class="searchbtncross" id="close" onclick="closeForm1()"><i class="fas fa-times"></i></button>
+ </form>
+</div>
 
+<!-- POP-UP ON ADD GROUP -->
     <div class="form-popup" id="myForm">
-      <form onsubmit="addGrp(event)" class="form-container">
-
-    
+      <form onsubmit="addGrp(event)" class="form-container">    
         <label for="text"><b>Create Group</b></label><br><br>
         <input type="text" placeholder="Enter Group Name" id="grpName" required>
-    
-        <button type="submit" class="btn">Create</button>
-        <button type="button" class="searchbtncross" id="close" onclick="closeForm()"><i class="fas fa-times"></i></button>
+        <button type="submit" style="margin-top:0em;"    class="btn">Create</button>
+        <button type="button" class="searchbtncross" id="closeGrp" onclick="closeForm()"><i class="fas fa-times"></i></button>
       </form>
     </div>
     
     <div id="tiles" class="tiles">
-      <button type="button" class="tilebtn">Group name</button>
+      <div id="${obj.id}"><button type="button" onclick= "getMembers('${ obj.id}')" ondblclick="deleteGrp('${ obj.id}')" class="tilebtn">${obj.grpName}</button></div>;
     </div>
     </div>
+    <button type="button" onclick="oldMsg(event)">Old Message</button>
+    <button type="button" onclick="nextMsg(event)">New Message</button>
+    <div>
     <fieldset id="msgs">
       <p class="join">Vaibhav joined</p>
       <p class="chatbox">Vaibhav: Hello!!</p>
@@ -50,18 +60,46 @@
     </fieldset>
     <div>
       <form onsubmit="saveMsg(event)">
-        <input type="text" class="input" id="msg" >
         <button type="submit" class="btn">Send</button>
+         <input type="text" class="input" id="msg">
       </form>
     </div>
   </div>
+
+  <!-- CENTER DIV -->
+  <div class="memberbox"> 
+    <div class="header2">
+      <B >MEMBERS</B>
+    </div>
+    <div id="members">
+    <div class="membtn">
+      <p style="margin-left: 1.8em;margin-top:1.5em;">ayan</p>
+          <div style="margin-top:-3.1em;" id="btnhidden"><button type="button" class="membtnmini">Make Admin</button>
+            <button type="button" class="membtnmini">RemoAdmin</button>
+            <button type="button" class="membtnmini">Delete Mem</button></div>
+          </div>
+        </div>
+  </div>
+</div>
+
+
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
   <script>
 
-    const parentNode = document.getElementById('msgs');
+function fun1()
+     {
+      console.log("a is cicked");
+     }
 
+    const parentNode = document.getElementById('msgs');
     const tileNode = document.getElementById('tiles');
-    
+    const userNode = document.getElementById('listUsers');
+    const searchNode = document.getElementById('search');
+    const memberNode = document.getElementById('members');
+    const closeBtn = document.getElementById('close');
+    const btnhiddenNode = document.getElementById('btnhidden');
+    const closeGrp= document.getElementById('closeGrp');
 
     //REFRESH WINDOW OR REFRESH DATA EVERY SECOND
     window.addEventListener("DOMContentLoaded", async function lsLoad() {
@@ -69,21 +107,43 @@
         await latestMsg();
       }
       if (!localStorage.getItem('grpname')) {
-        await getGrp();
+         await getGrp();
+       }
+       if(localStorage.getItem('members'))
+       {
+        const gid=localStorage.getItem('groupid');
+        const Member = JSON.parse(localStorage.getItem('members'));
+        memberNode.innerHTML=' ';
+        if(localStorage.getItem('isAdmin')==="true")
+        {
+          for(let i=0;i<Member.length;i++)
+        {
+         showMember(Member[i],"membtnmini",gid);
+        }  
+        }
+        else{
+        for(let i=0;i<Member.length;i++)
+        {
+          const tile= `<div class="membtn" ><p style="margin-left: 1.8em;margin-top:1.5em;">${Member[i].name}</p>
+         </div>`;
+         memberNode.innerHTML=memberNode.innerHTML+tile;
+        }
+        }
       }
+
       const groups=JSON.parse(localStorage.getItem('grpname'));
       const chatMsg = JSON.parse(localStorage.getItem('chat'));
       parentNode.innerHTML = ' ';
       tileNode.innerHTML=' ';
-      for (let i = 0; i < chatMsg.length; i++) {
+        for (let i = 0; i < chatMsg.length; i++) {
         await showMsg(chatMsg[i]);
         parentNode.scrollTop = parentNode.scrollHeight;
       }
-      for(let i=0;i<groups.length;i++)
-      {
-        showGroup(groups[i]);
-      }
-    })
+        await showGroup(groups);
+     let tile=`<button type="button" onclick= showUserOnly() class="tilebtn">Common Group</button>`;
+      tileNode.innerHTML=tileNode.innerHTML+tile;
+  }
+)
     
     function openForm() {
   document.getElementById("myForm").style.display = "block";

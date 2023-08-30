@@ -2,6 +2,7 @@ const User = require("../model/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const Msg = require("../model/msg");
+const Usergroup = require("../model/usergroup");
 
 //SIGNUP
 exports.signup = async (req, res, next) => {
@@ -51,4 +52,83 @@ exports.login = async (req, res, next) => {
       });
     })
     .catch((err) => console.log(err));
+};
+
+//GET USERS OF GROUP
+exports.getMembers = async (req, res, next) => {
+  try {
+    const { gid } = req.query;
+    const users = await Usergroup.findAll({
+      where: {
+        grpId: +gid,
+      },
+      attributes: ["userId"],
+      include: {
+        model: User,
+        attributes: ["name"],
+      },
+      raw: true,
+      nest: true,
+    });
+    let naam = "";
+    users.forEach((ele) => {
+      naam = ele.user.name;
+      delete ele.user;
+      ele.name = naam;
+    });
+    const isAdmin = await Usergroup.findOne({
+      where: {
+        userId: +req.user.id,
+        grpId: +gid,
+        isAdmin: true,
+      },
+    });
+
+    const chats = await Msg.findAll({
+      where: { grpId: +gid },
+      attributes: ["name", "message"],
+    });
+
+    return res.status(201).json({ users: users, admin: isAdmin, chats: chats });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//SEARCH ALL USERS
+exports.getUsers = async (req, res, next) => {
+  try {
+    console.log(req.query.search);
+    const { search } = req.query;
+    const users = await User.findAll({
+      attributes: ["name", "number", "id"],
+      raw: true,
+    });
+    const arr = [];
+    users.forEach((ele) => {
+      if (ele.number == search || ele.name.toLowerCase().indexOf(search) == 0) {
+        arr.push(ele);
+      }
+    });
+    res.status(201).json(arr);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//GET ALL USERS
+exports.showUserOnly = async (req, res, next) => {
+  try {
+    const users = await User.findAll({
+      attributes: ["id", "name"],
+    });
+    const chats = await Msg.findAll({
+      where: { grpId: null },
+      attributes: ["name", "message"],
+    });
+
+    return res.status(201).json({ users: users, chats: chats });
+  } catch (err) {
+    console.log(err);
+  }
 };

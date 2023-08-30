@@ -11,7 +11,7 @@ body{
 
 .form-modal{
     position:relative;
-    width:795px;
+    width:1000px;
     height:524px;
     margin-top:3em;
     left:50%;
@@ -27,10 +27,11 @@ body{
 
 .form-modal .input{
     position: relative;
-    margin-left:6.4cm;
-    width:485px;
+    width:491px;
     font-size:1em;
     padding:0.3em ; 
+    float: right;
+    margin-top: -1.35em;
     border:none;
     background:whitesmoke;
     font-weight: bold;
@@ -53,13 +54,14 @@ body{
     /* position: relative; */
     overflow-y: scroll;
     width:550px;
-    margin-top: -27.5em;
+    margin-top: -28.9em;
     float: right;
     height:440px;
     background:wheat;
     line-height:10px;
     /* border:none; */
     border: 2px solid rgb(37, 37, 37);
+    
 }
 .form-modal .gpbox{
     /* position: relative; */
@@ -71,12 +73,26 @@ body{
     border: 2px solid rgb(37, 37, 37);
 }
 
+.form-modal .memberbox{
+  
+  width:206px;
+  height:440px;
+  background:wheat;
+  margin-left: 15em;
+  margin-top: -28.9em;
+  line-height:10px;
+  /* border:none; */
+  border: 2px solid rgb(37, 37, 37);
+}
+
 .form-modal .btn{
     position: relative;
     font-size:1em;
     width:59px;
     padding:0.3em 0.7em;
+    float: right;
     cursor: pointer;
+    margin-top: -1.35em;
     color:whitesmoke;
     background:#626d62;
     border-top-right-radius: 10px;
@@ -100,16 +116,46 @@ body{
 overflow-inline: scroll;
 }
 
-.form-modal .tilebtn{
-    text-align: left;
-    cursor:pointer;
-    background-color: rgb(192, 179, 179);
-    width: 237px;
+.form-modal .membtn{
+  text-align: left;
+    background-color: rgb(88, 84, 84);
+    width: 202px;
     border: none;
     font-size: 16px;
     border-top:0.5px solid black ;
-    border-bottom:0.5px solid black ;
-    height:55px;
+    border-bottom:2px solid black ;
+    height:63px;
+    color:whitesmoke;
+}
+
+.form-modal .membtnmini{
+    cursor:pointer;
+    margin-left: 3.2cm;
+    width:80px;
+    font-size: 11px;
+    height: 20px;
+  }
+
+
+  .form-modal .membtnmini2{
+    cursor:pointer;
+    margin-left: 3.2cm;
+    width:80px;
+    font-size: 11px;
+    height: 20px;
+    visibility: hidden;
+  }
+
+
+
+.form-modal .tilebtn{
+    cursor:pointer;
+    background-color: rgb(63, 57, 57);
+    width: 238px;
+    border-bottom:1px solid whitesmoke;
+    font-size: 15px;
+    padding: 18px;
+    padding-inline: 41.5px;
     color:whitesmoke;
 }
 
@@ -119,6 +165,11 @@ overflow-inline: scroll;
     border:1.8px solid black;
     background:whitesmoke;
 }
+/* 
+.form-modal .scrollhogi{
+overflow-y: scroll;
+
+} */
 
 .form-modal .btn:hover {
     background-color: #292828;
@@ -129,6 +180,11 @@ overflow-inline: scroll;
     background-color: #292828;
     color: #fff;
 }
+.form-modal .membtnmini:hover{
+  background-color: #797474;
+  color: #fff;
+}
+
 
   .form-modal .tilebtn:hover
 {
@@ -144,6 +200,18 @@ overflow-inline: scroll;
     background: #04AA6D;
     border-top-right-radius: 10px;
     border-top-left-radius: 10px;
+    
+}
+
+
+.form-modal .memberbox .header2{
+  width: 202px;
+  height:40px;
+  padding-bottom: 80px;
+  margin-top: 0em;
+  border-bottom:0.5px solid black ;
+  text-align: center;
+  background: #04AA6D;
     
 }
 
