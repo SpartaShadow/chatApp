@@ -3,6 +3,7 @@ const router = express.Router();
 const grpController = require("../controller/group");
 const middle = require("../middleware/auth");
 
+//ROUTES
 router.post("/login/addGrp", middle.authenticate, grpController.addGrp);
 router.get("/login/getGrp", middle.authenticate, grpController.getGrp);
 router.get("/makeAdmin", grpController.makeAdmin);
@@ -11,4 +12,5 @@ router.get("/removeFromGroup", grpController.removeFromGroup);
 router.get("/deleteGrp", grpController.deleteGrp);
 router.get("/addToGroup", grpController.addToGroup);
 
+//EXPORTS
 module.exports = router;

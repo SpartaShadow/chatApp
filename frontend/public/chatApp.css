@@ -1,170 +1,167 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat|Quicksand');
 
-*{
-    font-family: 'quicksand',Arial, Helvetica, sans-serif;
-    box-sizing: border-box;
+* {
+  font-family: 'quicksand', Arial, Helvetica, sans-serif;
+  box-sizing: border-box;
 }
 
-body{
-    background:#fff;
+body {
+  background: #fff;
 }
 
-.form-modal{
-    position:relative;
-    width:1000px;
-    height:524px;
-    margin-top:3em;
-    left:50%;
-    transform:translateX(-50%);
-    background:#626d62;
-    border-top-right-radius: 14px;
-    border-top-left-radius: 14px;
-    border-bottom-right-radius: 10px;
-    border-bottom-left-radius: 10px;
-    border:2.5px solid #3e413e;
-    box-shadow:0 3px 20px 0px rgba(0, 0, 0, 0.1);
+.form-modal {
+  position: relative;
+  width: 1000px;
+  height: 524px;
+  margin-top: 3em;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #626d62;
+  border-top-right-radius: 14px;
+  border-top-left-radius: 14px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border: 2.5px solid #3e413e;
+  box-shadow: 0 3px 20px 0px rgba(0, 0, 0, 0.1);
 }
 
-.form-modal .input{
-    position: relative;
-    width:491px;
-    font-size:1em;
-    padding:0.3em ; 
-    float: right;
-    margin-top: -1.35em;
-    border:none;
-    background:whitesmoke;
-    font-weight: bold;
-    transition:0.3s;
-    outline:none;
+.form-modal .input {
+  position: relative;
+  width: 491px;
+  font-size: 1em;
+  padding: 0.3em;
+  float: right;
+  margin-top: -1.35em;
+  border: none;
+  background: whitesmoke;
+  font-weight: bold;
+  transition: 0.3s;
+  outline: none;
 }
 
-.form-modal .searchbox{
-    position: relative;
-    width:170px;
-    font-size:1em;
-    padding:0.3em ; 
-    border:1px solid black;
-    background:whitesmoke;
-    font-weight: bold;
-    outline: none;
+.form-modal .searchbox {
+  position: relative;
+  width: 170px;
+  font-size: 1em;
+  padding: 0.3em;
+  border: 1px solid black;
+  background: whitesmoke;
+  font-weight: bold;
+  outline: none;
 }
 
-.form-modal fieldset{
-    /* position: relative; */
-    overflow-y: scroll;
-    width:550px;
-    margin-top: -28.9em;
-    float: right;
-    height:440px;
-    background:wheat;
-    line-height:10px;
-    /* border:none; */
-    border: 2px solid rgb(37, 37, 37);
-    
-}
-.form-modal .gpbox{
-    /* position: relative; */
-    width:243px;
-    height:440px;
-    background:wheat;
-    line-height:10px;
-    /* border:none; */
-    border: 2px solid rgb(37, 37, 37);
-}
-
-.form-modal .memberbox{
-  
-  width:206px;
-  height:440px;
-  background:wheat;
-  margin-left: 15em;
+.form-modal fieldset {
+  /* position: relative; */
+  overflow-y: scroll;
+  width: 550px;
   margin-top: -28.9em;
-  line-height:10px;
+  float: right;
+  height: 440px;
+  background: wheat;
+  line-height: 10px;
   /* border:none; */
   border: 2px solid rgb(37, 37, 37);
 }
 
-.form-modal .btn{
-    position: relative;
-    font-size:1em;
-    width:59px;
-    padding:0.3em 0.7em;
-    float: right;
-    cursor: pointer;
-    margin-top: -1.35em;
-    color:whitesmoke;
-    background:#626d62;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border:none;
-
+.form-modal .gpbox {
+  /* position: relative; */
+  width: 243px;
+  height: 440px;
+  background: wheat;
+  line-height: 10px;
+  /* border:none; */
+  border: 2px solid rgb(37, 37, 37);
 }
 
-.form-modal .searchbtn{
-    position: relative;
-    font-size:1em;
-    width:33px;
-    float: right;
-    height:32px;
-    cursor: pointer;
-    color:whitesmoke;
-    background:#04AA6D;
-    border:none;
-}
-.form-modal .tiles{
-overflow-inline: scroll;
+.form-modal .memberbox {
+  width: 206px;
+  height: 440px;
+  background: wheat;
+  margin-left: 15em;
+  margin-top: -28.9em;
+  line-height: 10px;
+  /* border:none; */
+  border: 2px solid rgb(37, 37, 37);
 }
 
-.form-modal .membtn{
+.form-modal .btn {
+  position: relative;
+  font-size: 1em;
+  width: 59px;
+  padding: 0.3em 0.7em;
+  float: right;
+  cursor: pointer;
+  margin-top: -1.35em;
+  color: whitesmoke;
+  background: #626d62;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border: none;
+}
+
+.form-modal .searchbtn {
+  position: relative;
+  font-size: 1em;
+  width: 33px;
+  float: right;
+  height: 32px;
+  cursor: pointer;
+  color: whitesmoke;
+  background: #04aa6d;
+  border: none;
+}
+
+.form-modal .tiles {
+  overflow-inline: scroll;
+}
+
+.form-modal .membtn {
   text-align: left;
-    background-color: rgb(88, 84, 84);
-    width: 202px;
-    border: none;
-    font-size: 16px;
-    border-top:0.5px solid black ;
-    border-bottom:2px solid black ;
-    height:63px;
-    color:whitesmoke;
+  background-color: rgb(88, 84, 84);
+  width: 202px;
+  border: none;
+  font-size: 16px;
+  border-top: 0.5px solid black;
+  border-bottom: 2px solid black;
+  height: 63px;
+  color: whitesmoke;
 }
 
-.form-modal .membtnmini{
-    cursor:pointer;
-    margin-left: 3.2cm;
-    width:80px;
-    font-size: 11px;
-    height: 20px;
-  }
-
-
-  .form-modal .membtnmini2{
-    cursor:pointer;
-    margin-left: 3.2cm;
-    width:80px;
-    font-size: 11px;
-    height: 20px;
-    visibility: hidden;
-  }
-
-
-
-.form-modal .tilebtn{
-    cursor:pointer;
-    background-color: rgb(63, 57, 57);
-    width: 238px;
-    border-bottom:1px solid whitesmoke;
-    font-size: 15px;
-    padding: 18px;
-    padding-inline: 41.5px;
-    color:whitesmoke;
+.form-modal .membtnmini {
+  cursor: pointer;
+  margin-left: 3.2cm;
+  width: 80px;
+  font-size: 11px;
+  height: 20px;
 }
 
-.form-modal .searchdiv{
-    position: relative;
-    width:238px;
-    border:1.8px solid black;
-    background:whitesmoke;
+.form-modal .membtnmini2 {
+  cursor: pointer;
+  margin-left: 3.2cm;
+  width: 80px;
+  font-size: 11px;
+  height: 20px;
+  visibility: hidden;
 }
+
+.form-modal .tilebtn {
+  cursor: pointer;
+  background-color: rgb(63, 57, 57);
+  width: 238px;
+  border-bottom: 1px solid whitesmoke;
+  font-size: 15px;
+  padding: 18px;
+  padding-inline: 41.5px;
+  color: whitesmoke;
+}
+
+.form-modal .searchdiv {
+  position: relative;
+  width: 238px;
+  border: 1.8px solid black;
+  background: whitesmoke;
+}
+
 /* 
 .form-modal .scrollhogi{
 overflow-y: scroll;
@@ -172,74 +169,69 @@ overflow-y: scroll;
 } */
 
 .form-modal .btn:hover {
-    background-color: #292828;
-    color: #fff;
-  }
-
-  .form-modal .searchbtn:hover{
-    background-color: #292828;
-    color: #fff;
+  background-color: #292828;
+  color: #fff;
 }
-.form-modal .membtnmini:hover{
+
+.form-modal .searchbtn:hover {
+  background-color: #292828;
+  color: #fff;
+}
+
+.form-modal .membtnmini:hover {
   background-color: #797474;
   color: #fff;
 }
 
-
-  .form-modal .tilebtn:hover
-{
-    background-color: #797474;
-    color: #fff;
-}
-.form-modal header{
-    position: relative;
-    width:auto;
-    height:50px;
-    margin-top: -2em;
-    /* background:#626d62; */
-    background: #04AA6D;
-    border-top-right-radius: 10px;
-    border-top-left-radius: 10px;
-    
+.form-modal .tilebtn:hover {
+  background-color: #797474;
+  color: #fff;
 }
 
+.form-modal header {
+  position: relative;
+  width: auto;
+  height: 50px;
+  margin-top: -2em;
+  /* background:#626d62; */
+  background: #04aa6d;
+  border-top-right-radius: 10px;
+  border-top-left-radius: 10px;
+}
 
-.form-modal .memberbox .header2{
+.form-modal .memberbox .header2 {
   width: 202px;
-  height:40px;
+  height: 40px;
   padding-bottom: 80px;
   margin-top: 0em;
-  border-bottom:0.5px solid black ;
+  border-bottom: 0.5px solid black;
   text-align: center;
-  background: #04AA6D;
-    
+  background: #04aa6d;
 }
 
-
-
-.form-modal .chatbox{
-    padding: 10px;
-    background-color: rgb(54, 51, 51);
-    width:fit-content;
-    border-radius: 8px;
-    border-top-left-radius: 0px;
-    color:whitesmoke;
+.form-modal .chatbox {
+  padding: 10px;
+  background-color: rgb(54, 51, 51);
+  width: fit-content;
+  border-radius: 8px;
+  border-top-left-radius: 0px;
+  color: whitesmoke;
 }
 
-.form-modal .chat{
-    font-size:2em;
-    color:whitesmoke;
-    text-align: center;
+.form-modal .chat {
+  font-size: 2em;
+  color: whitesmoke;
+  text-align: center;
 }
 
-.form-modal fieldset .join{
+.form-modal fieldset .join {
   margin: auto;
-  width:fit-content;
+  width: fit-content;
   text-align: center;
   background-color: rgb(105, 99, 99);
-  padding:5px;
+  padding: 5px;
   border-radius: 8px;
-  color:whitesmoke;
+  color: whitesmoke;
 }
 
 /* Button used to open the contact form - fixed at the bottom of the page */
@@ -274,7 +266,8 @@ overflow-y: scroll;
 }
 
 /* Full-width input fields */
-.form-container input[type=text], .form-container input[type=password] {
+.form-container input[type='text'],
+.form-container input[type='password'] {
   width: 100%;
   padding: 15px;
   margin: 5px 0 22px 0;
@@ -283,14 +276,15 @@ overflow-y: scroll;
 }
 
 /* When the inputs get focus, do something */
-.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+.form-container input[type='text']:focus,
+.form-container input[type='password']:focus {
   background-color: #ddd;
   outline: none;
 }
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: #04AA6D;
+  background-color: #04aa6d;
   color: white;
   padding: 10px 20px;
   border-top-left-radius: 8px;
@@ -299,12 +293,12 @@ overflow-y: scroll;
   margin-left: 4em;
   cursor: pointer;
   width: 100px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
 }
 
-.searchbtncross{
-  background-color: #04AA6D;
+.searchbtncross {
+  background-color: #04aa6d;
   color: white;
   padding: 10px 10px;
   border: none;
@@ -312,13 +306,11 @@ overflow-y: scroll;
   cursor: pointer;
   border-radius: 8px;
   width: 40px;
-  margin-bottom:10px;
+  margin-bottom: 10px;
   opacity: 0.8;
-  
 }
 
-.searchbtncross:hover{
-    background-color: #292828;
-    color: #fff;
+.searchbtncross:hover {
+  background-color: #292828;
+  color: #fff;
 }
-  

@@ -45,6 +45,7 @@ async function logUp(event) {
 //SAVE MESSAGE
 async function saveMsg(event) {
   event.preventDefault();
+  const gid = localStorage.getItem("groupid");
   const message = event.target.msg.value;
   event.target.msg.value = " ";
   let obj = {
@@ -274,7 +275,6 @@ function showGroup(obj) {
       tile = `<div id="${ele.id}"><button type="button" onclick= "getMembers('${ele.id}')" ondblclick="deleteGrp('${ele.id}')" class="tilebtn">${ele.grpName}</button></div>`;
     }
     tileNode.innerHTML = tileNode.innerHTML + tile;
-    tileNode.innerHTML = tileNode.innerHTML + tile;
   }
 
   //SHOW MEMBERS
@@ -284,11 +284,6 @@ function showGroup(obj) {
       <button type="button" onclick="removeAdmin('${obj.userId}','${gid}')" class="${css}">RemoAdmin</button>
       <button type="button" onclick="removeFromGroup('${obj.userId}','${gid}')" class="${css}">Delete Mem</button></div></div>`;
     memberNode.innerHTML = memberNode.innerHTML + tile;
-  }
-
-  //GROUP MESSAGES
-  async function grpMsg(event) {
-    event.preventDefault();
   }
 
   //SEARCH USERS

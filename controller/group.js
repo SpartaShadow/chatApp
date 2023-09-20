@@ -1,9 +1,9 @@
+//models
 const User = require("../model/user");
-const Msg = require("../model/msg");
 const Grp = require("../model/group");
 const Usergroup = require("../model/usergroup");
 
-//ADD GROUP
+//add grp
 exports.addGrp = async (req, res, next) => {
   try {
     const { grpName } = req.body;

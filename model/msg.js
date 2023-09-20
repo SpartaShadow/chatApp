@@ -10,6 +10,7 @@ const Msg = sequelize.define(
       primaryKey: true,
     },
     message: Sequelize.STRING,
+    name: Sequelize.STRING,
   },
   {
     timestamps: true,
