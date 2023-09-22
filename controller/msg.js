@@ -1,4 +1,3 @@
-const User = require("../model/user");
 const Msg = require("../model/msg");
 
 //SEND MESSAGE
@@ -6,12 +5,10 @@ exports.sendMsg = async (req, res, next) => {
   try {
     const { message } = req.body;
     const { name } = req.user;
-    console.log(">>>>>>>>>>>>>>>>" + req.body);
-    console.log(">>>>>>>>>>>" + req.body.gid);
     if (message.length === 0 || message === "") {
       return res.status(500).json({ message: "SomeThing is Missing" });
     }
-    if (req.body.gid === undefined) {
+    if (req.body.gid === "undefined") {
       const result = await req.user.createMsg({ message, name });
       return res.status(200).json(result);
     }

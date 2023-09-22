@@ -48,7 +48,9 @@ exports.login = async (req, res, next) => {
             token: generateToken(exist[0].id, exist[0].name, exist[0].number),
           });
         }
-        return res.status(401).json({ message: "User not authorized" });
+        return res
+          .status(401)
+          .json({ message: "User not authorized", name: exist[0].name });
       });
     })
     .catch((err) => console.log(err));
@@ -76,13 +78,16 @@ exports.getMembers = async (req, res, next) => {
       delete ele.user;
       ele.name = naam;
     });
-    const isAdmin = await Usergroup.findOne({
+    let isAdmin = await Usergroup.findOne({
       where: {
         userId: +req.user.id,
         grpId: +gid,
         isAdmin: true,
       },
     });
+    if (!isAdmin) {
+      isAdmin = { isAdmin: false };
+    }
 
     const chats = await Msg.findAll({
       where: { grpId: +gid },

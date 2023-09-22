@@ -7,6 +7,7 @@
   <title>Chat App</title>
   <link rel="stylesheet" href="../public/chatApp.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <script src="https://cdn.socket.io/3.1.3/socket.io.min.js" integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -49,7 +50,7 @@
     </div>
     
     <div id="tiles" class="tiles">
-      <div id="${obj.id}"><button type="button" onclick= "getMembers('${ obj.id}')" ondblclick="deleteGrp('${ obj.id}')" class="tilebtn">${obj.grpName}</button></div>;
+      <div id="${obj.id}"><button type="button" onclick= "getMembers(`${ obj.id}`)" ondblclick="deleteGrp(`${ obj.id}`)" class="tilebtn">${obj.grpName}</button></div>;
     </div>
     </div>
     <button type="button" onclick="oldMsg(event)">Old Message</button>
@@ -87,7 +88,9 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.4.0/axios.min.js"></script>
   <script>
-
+    
+    const parentNode = document.getElementById('msgs');
+    const messageNode=document.getAnimations('msg');
     const tileNode = document.getElementById('tiles');
     const userNode = document.getElementById('listUsers');
     const searchNode = document.getElementById('search');
@@ -149,7 +152,7 @@ function closeForm() {
 }
 
   </script>
-  <script src="../script/login.js"></script>
+  <script src="../script/chatApp.js"></script>
 </body>
 
 </html>
