@@ -63,8 +63,10 @@
     </fieldset>
     <div>
       <form onsubmit="saveMsg(event)">
+        <input type="file" id="file">
+        <button class="btn" type="button" onclick="uploadFile(event)">Upload</button>
         <button type="submit" class="btn">Send</button>
-         <input type="text" class="input" id="msg">
+        <input type="text" class="input" id="msg">
       </form>
     </div>
   </div>
@@ -98,6 +100,7 @@
     const closeBtn = document.getElementById('close');
     const btnhiddenNode = document.getElementById('btnhidden');
     const closeGrp= document.getElementById('closeGrp');
+    const file=document.getElementById('file');
 
     //REFRESH WINDOW OR REFRESH DATA EVERY SECOND
     window.addEventListener("DOMContentLoaded", async function lsLoad() {

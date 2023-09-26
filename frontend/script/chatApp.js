@@ -360,3 +360,41 @@ async function deleteGrp(gid) {
   const child = document.getElementById(gid);
   tileNode.removeChild(child);
 }
+
+//UPLOAD FILE
+async function uploadFile(event) {
+  try {
+    event.preventDefault();
+    const uploadedfile = file.files[0];
+    console.log(uploadedfile);
+    if (!uploadedfile) {
+      alert("Please Upload a file ");
+    } else {
+      const formData = new FormData();
+      formData.append("file", uploadedfile);
+      console.log(formData);
+      const groupId = JSON.parse(localStorage.getItem("groupid"));
+      const token = localStorage.getItem("token");
+      const response = await axios.post(
+        `http://localhost:3000/verifiedUser/sendfile/${groupId}`,
+        formData,
+        {
+          headers: {
+            Authorization: token,
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      console.log(response);
+      showmessage(response.data.message.name, response.data.message.message);
+      uploadedfile.value = null;
+    }
+  } catch (err) {
+    console.log(err);
+    msg.innerHTML = "";
+    msg.innerHTML = msg.innerHTML + `<div>${err.response.data.message}</div>`;
+    setTimeout(() => {
+      msg.innerHTML = "";
+    }, 3000);
+  }
+}
