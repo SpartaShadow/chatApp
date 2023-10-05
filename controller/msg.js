@@ -27,7 +27,7 @@ exports.sendMsg = async (req, res, next) => {
 exports.getMsg = async (req, res, next) => {
   let id = +req.query.msgid;
   console.log(req.query);
-  const { gid } = req.query.gid;
+  let gid = req.query.gid;
   if (req.query.what === "old") {
     id = +req.query.msgid - 10;
     if (id < 10) {

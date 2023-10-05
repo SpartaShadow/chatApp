@@ -5,7 +5,11 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const path = require("path");
 const server = require("http").Server(app);
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors: {
+    origin: "*",
+  },
+});
 const fileupload = require("express-fileupload");
 app.use(fileupload());
 
