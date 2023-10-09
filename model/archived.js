@@ -1,8 +1,7 @@
 const Sequelize = require("sequelize");
-const Op = require("sequelize");
 const sequelize = require("../util/database");
-const Grp = sequelize.define(
-  "grp",
+const Archived = sequelize.define(
+  "archived",
   {
     id: {
       type: Sequelize.INTEGER,
@@ -10,10 +9,14 @@ const Grp = sequelize.define(
       allowNull: false,
       primaryKey: true,
     },
-    grpName: Sequelize.STRING,
+    message: Sequelize.STRING,
+    name: Sequelize.STRING,
+    userId: Sequelize.INTEGER,
+    grpId: Sequelize.INTEGER,
+    sendAt: Sequelize.DATE,
   },
   {
     timestamps: false,
   }
 );
-module.exports = Grp;
+module.exports = Archived;

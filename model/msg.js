@@ -1,4 +1,5 @@
 const Sequelize = require("sequelize");
+const Op = require("sequelize");
 const sequelize = require("../util/database");
 const Msg = sequelize.define(
   "msg",
@@ -14,7 +15,7 @@ const Msg = sequelize.define(
   },
   {
     timestamps: true,
-    createdAt: "Send At",
+    createdAt: "sendAt",
     updatedAt: false,
   }
 );

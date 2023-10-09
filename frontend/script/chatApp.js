@@ -1,5 +1,4 @@
-const username = localStorage.getItem("username");
-//let message='wqertyt';
+let username = localStorage.getItem("username");
 
 //SOCKET
 
@@ -82,7 +81,7 @@ async function nextMsg(event) {
       msgid = getmsgId[getmsgId.length - 1].id;
     }
     let resp = await axios.get(
-      `http://localhost:3000/verifiedUser/getMsg?${gid}&what=next&msgid=${msgid}`,
+      `http://localhost:3000/verifiedUser/getMsg?gid=${gid}&what=next&msgid=${msgid}`,
       { headers: { authorization: token } }
     );
     console.log(resp);
@@ -179,6 +178,11 @@ async function getMembers(grpid) {
     for (let i = 0; i < resp.data.chats.length; i++) {
       showMsg(resp.data.chats[i]);
     }
+    const leaveId = localStorage.getItem("groupid");
+    localStorage.setItem("groupid", grpid);
+    socket.emit("leave-room", leaveId);
+    console.log(leaveId);
+    console.log(grpid);
     socket.emit("join-room", grpid, username, (welcome) => {
       displayJoin(welcome);
     });
@@ -203,14 +207,19 @@ async function showUserOnly() {
     console.log(resp);
     localStorage.setItem("members", JSON.stringify(resp.data.users));
     localStorage.setItem("chat", JSON.stringify(resp.data.chats));
-    localStorage.setItem("groupid", JSON.stringify(undefined));
     localStorage.setItem("isAdmin", JSON.stringify(undefined));
+    const leaveId = localStorage.getItem("groupid");
+    localStorage.setItem("groupid", 0);
+    const joinId = localStorage.getItem("groupid");
+    console.log(leaveId);
     memberNode.innerHTML = "";
     parentNode.innerHTML = "";
     for (let i = 0; i < resp.data.chats.length; i++) {
       showMsg(resp.data.chats[i]);
     }
-    socket.emit("join-room", "0", username, (welcome) => {
+    socket.emit("leave-room", leaveId);
+    console.log(joinId);
+    socket.emit("join-room", joinId, username, (welcome) => {
       displayJoin(welcome);
     });
     resp.data.users.forEach((ele) => {
@@ -375,7 +384,7 @@ async function uploadFile(event) {
       console.log(formData);
       const groupId = JSON.parse(localStorage.getItem("groupid"));
       const token = localStorage.getItem("token");
-      const response = await axios.post(
+      const result = await axios.post(
         `http://localhost:3000/verifiedUser/sendfile/${groupId}`,
         formData,
         {
@@ -385,16 +394,12 @@ async function uploadFile(event) {
           },
         }
       );
-      console.log(response);
-      showmessage(response.data.message.name, response.data.message.message);
-      uploadedfile.value = null;
+      console.log(result);
+      showmessage(result.data.message.name, result.data.message.message);
+      file.value = null;
     }
   } catch (err) {
     console.log(err);
-    msg.innerHTML = "";
-    msg.innerHTML = msg.innerHTML + `<div>${err.response.data.message}</div>`;
-    setTimeout(() => {
-      msg.innerHTML = "";
-    }, 3000);
+    alert(err.response.data.message);
   }
 }

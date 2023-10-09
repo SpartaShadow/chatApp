@@ -20,6 +20,7 @@ const grpRoutes = require("./route/group");
 
 //models
 const sequelize = require("./util/database");
+const Archived = require("./model/archived");
 const User = require("./model/user");
 const Msg = require("./model/msg");
 const Grp = require("./model/group");
@@ -33,12 +34,12 @@ io.on("connection", (socket) => {
     console.log(io.sockets.adapter.rooms);
     cb(`${username} joined`);
   });
+  socket.on("leave-room", (leaveId) => {
+    socket.leave(leaveId);
+    console.log(io.sockets.adapter.rooms);
+  });
   socket.on("send-message", (gid, usermsg) => {
-    if (gid == "undefined") {
-      socket.broadcast.emit("receive-message", usermsg);
-    } else {
-      socket.to(gid).emit("receive-message", usermsg);
-    }
+    socket.to(gid).emit("receive-message", usermsg);
   });
 });
 
@@ -79,6 +80,6 @@ Msg.belongsTo(Grp);
 
 //sync
 sequelize
-  .sync()
+  .sync({ force: true })
   .then(server.listen(3000, () => console.log("server connected")))
   .catch((err) => console.log(err));

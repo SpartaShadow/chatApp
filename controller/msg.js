@@ -1,4 +1,5 @@
 const Msg = require("../model/msg");
+const Op = require("sequelize");
 
 //SEND MESSAGE
 exports.sendMsg = async (req, res, next) => {
@@ -8,7 +9,7 @@ exports.sendMsg = async (req, res, next) => {
     if (message.length === 0 || message === "") {
       return res.status(500).json({ message: "SomeThing is Missing" });
     }
-    if (req.body.gid === "undefined") {
+    if (req.body.gid == 0) {
       const result = await req.user.createMsg({ message, name });
       return res.status(200).json(result);
     }
@@ -27,7 +28,11 @@ exports.sendMsg = async (req, res, next) => {
 exports.getMsg = async (req, res, next) => {
   let id = +req.query.msgid;
   console.log(req.query);
-  let gid = req.query.gid;
+  let { gid } = req.query.gid;
+  if (gid == 0) {
+    gid = null;
+  }
+  console.log(">>>>>>>>>>>>>>>>>>>>>>>>" + gid);
   if (req.query.what === "old") {
     id = +req.query.msgid - 10;
     if (id < 10) {
@@ -37,7 +42,7 @@ exports.getMsg = async (req, res, next) => {
   console.log(id + "74");
   try {
     const result = await Msg.findAll({
-      where: { userId: req.user.userId, grpId: gid || 0 },
+      where: { userId: req.user.userId, grpId: gid },
       offset: id, //+/NUMBER for integer type
       limit: 10,
       attributes: ["message", "name", "grpId"],
@@ -58,6 +63,9 @@ exports.latestMsg = async (req, res, next) => {
       count = 10;
     }
     const result = await Msg.findAll({
+      where: {
+        grpId: null,
+      },
       offset: Number(count - 10),
       limit: 10,
       attributes: ["id", "message", "name"],
@@ -66,6 +74,40 @@ exports.latestMsg = async (req, res, next) => {
       return res.status(200).json(result);
     }
     res.status(404).json({ success: "false" });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+//COPY & DELETE 1 DAY OLD
+exports.copydelete = async (req, res, next) => {
+  try {
+    const result = await Msg.findAll({
+      where: {
+        sendAt: { [Op.lt]: new Date() },
+      },
+    });
+    console.log(result);
+    if (result.length > 0) {
+      result.forEach((ele) => {
+        Archived.create({
+          name: ele.name,
+          message: ele.message,
+          sendAt: ele.Send_At,
+          userId: ele.userId,
+          grpId: ele.grpId,
+        });
+      });
+      await Msg.destroy({
+        where: {
+          sendAt: {
+            [Op.lt]: new Date(),
+          },
+        },
+      });
+      return res.status(201).json(result);
+    }
+    res.status(404).json("FAILED RESULT");
   } catch (err) {
     console.log(err);
   }
@@ -101,9 +143,16 @@ exports.uploadFile = async (req, res, next) => {
 
     console.log(">>>>>>>", req.files.file);
     const file = req.files.file;
-    const fileName = file.name;
+    console.log(req.files);
     const fileURL = await uploadToS3(file);
     console.log(fileURL);
+    if (req.params.groupId == 0) {
+      const user = await req.user.createMsg({
+        name: req.user.username,
+        message: fileURL,
+      });
+      return res.status(200).json({ message: user, success: true });
+    }
     const user = await req.user.createMsg({
       name: req.user.username,
       message: fileURL,

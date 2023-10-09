@@ -32,9 +32,11 @@ async function logUp(event) {
   };
   try {
     let res = await axios.post("http://localhost:3000/user/login", userData);
+    localStorage.clear();
     console.log(res);
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("username", res.data.name);
+    localStorage.setItem("groupid", 0);
     alert(`${res.data.message}`);
     window.location.href = "../views/chatApp.html";
   } catch (err) {

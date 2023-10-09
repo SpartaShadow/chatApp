@@ -7,6 +7,7 @@ const middle = require("../middleware/auth");
 router.post("/sendMsg", middle.authenticate, msgController.sendMsg);
 router.get("/getMsg", middle.authenticate, msgController.getMsg);
 router.get("/latestMsg", middle.authenticate, msgController.latestMsg);
+router.get("/copydelete", msgController.copydelete);
 router.post(
   "/sendfile/:groupId",
   middle.authenticate,
